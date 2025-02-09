@@ -7,15 +7,29 @@ const imagekit = new ImageKit({
   urlEndpoint: process.env.NEXT_PUBLIC_URL_ENDPOINT!,
 });
 
-export async function GET() {
-    try{
-        const authenticationParameters = imagekit.getAuthenticationParameters()
-        return NextResponse.json(authenticationParameters);
-    } catch (error){
-        return NextResponse.json(
-            {error: "Image auth failed"},
-            {status: 500}
-        )
-    }
+// export async function GET() {
+//     try{
+//         const authenticationParameters = imagekit.getAuthenticationParameters()
+//         return NextResponse.json(authenticationParameters);
+//     } catch (error){
+//         return NextResponse.json(
+//             {error: "Image auth failed"},
+//             {status: 500}
+//         )
+//     }
  
+// }
+
+export async function GET() {
+    try {
+        const authenticationParameters = imagekit.getAuthenticationParameters();
+        return NextResponse.json(authenticationParameters);
+    } catch (error) {
+        console.error("ImageKit Authentication Error:", error); // Log the error
+        return NextResponse.json(
+            { error: "Image auth failed" },
+            { status: 500 }
+        );
+    }
 }
+
